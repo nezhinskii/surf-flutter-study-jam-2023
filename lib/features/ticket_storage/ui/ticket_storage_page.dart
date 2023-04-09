@@ -4,6 +4,7 @@ import 'package:surf_flutter_study_jam_2023/features/ticket_storage/ui/ticket_st
 import 'package:surf_flutter_study_jam_2023/features/ticket_storage/ui/widgets/floating_button.dart';
 import 'package:surf_flutter_study_jam_2023/features/ticket_storage/ui/widgets/bottom_sheet.dart';
 import 'package:surf_flutter_study_jam_2023/features/ticket_storage/ui/widgets/snack_bar.dart';
+import 'package:surf_flutter_study_jam_2023/features/ticket_storage/ui/widgets/ticket_tile.dart';
 import 'package:surf_flutter_study_jam_2023/utils/app_colors.dart';
 import 'package:surf_flutter_study_jam_2023/utils/app_strings.dart';
 import 'package:surf_flutter_study_jam_2023/utils/app_text_styles.dart';
@@ -59,7 +60,10 @@ class TicketStoragePage extends StatelessWidget {
                         child: Text(AppStrings.noTickets, style: AppTextStyles.strong,)
                     ) : ListView.builder(
                     itemBuilder: (context, index) {
-                      return Text(tickets[index].title);
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                        child: TicketTile(ticket: tickets[index],),
+                      );
                     },
                     itemCount: tickets.length,
                   );

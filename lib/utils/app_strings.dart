@@ -7,6 +7,7 @@ abstract class AppStrings{
   static const enterUrlError = "Введите корректный Url";
   static const noTickets = "Здесь пока ничего нет";
   static const addingSuccess = "Билет успешно добавлен";
+  static const waitingForDownload = "Ожидает начала загрузки";
   static String ticketType(TicketType ticketType) {
     switch (ticketType) {
       case TicketType.train:
@@ -15,4 +16,6 @@ abstract class AppStrings{
         return "Самолет";
     }
   }
+
+  static const ticketsBox = "tickets";
 }

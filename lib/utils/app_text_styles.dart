@@ -28,4 +28,11 @@ class AppTextStyles{
     fontSize: 14,
     color: Color.fromRGBO(255, 255, 255, 1)
   );
+
+  static const title = TextStyle(
+      fontFamily: 'Roboto',
+      fontWeight: FontWeight.w600,
+      fontSize: 16,
+      color: Color.fromRGBO(103, 89, 164, 1)
+  );
 }

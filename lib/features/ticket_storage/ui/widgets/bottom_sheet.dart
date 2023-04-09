@@ -18,7 +18,7 @@ class AddingTicketBottomSheet extends StatefulWidget {
 class _AddingTicketBottomSheetState extends State<AddingTicketBottomSheet> {
 
   late final _controller = TextEditingController();
-  bool _isValidUrl = false;
+  bool _isValidUrl = true;
   TicketType ticketType = TicketType.values[0];
 
   final urlRegExp = RegExp(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+');
@@ -107,7 +107,7 @@ class _AddingTicketBottomSheetState extends State<AddingTicketBottomSheet> {
                     _isValidUrl = true;
                   }
                 });
-                if (!_isValidUrl){
+                if (_isValidUrl){
                   context.read<TicketStorageBloc>().add(
                       TicketStorageEvent.add(_controller.value.text, ticketType)
                   );
