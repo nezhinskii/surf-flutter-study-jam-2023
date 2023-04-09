@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:surf_flutter_study_jam_2023/features/ticket_storage/domain/models/ticket.dart';
 import 'package:surf_flutter_study_jam_2023/features/ticket_storage/ui/ticket_storage_bloc/ticket_storage_bloc.dart';
@@ -17,17 +18,30 @@ class AddingTicketBottomSheet extends StatefulWidget {
 class _AddingTicketBottomSheetState extends State<AddingTicketBottomSheet> {
 
   late final _controller = TextEditingController();
-  bool _hasError = false;
+  bool _isValidUrl = false;
   TicketType ticketType = TicketType.values[0];
 
   final urlRegExp = RegExp(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+');
 
-  void validate(String str){
+  bool _hasError(String str){
     if (!urlRegExp.hasMatch(str) || !str.endsWith('.pdf')){
-      _hasError = false;
+      return false;
     } else {
-      _hasError = false;
+      return false;
     }
+  }
+
+  void getFromClipboard() async{
+    ClipboardData? data = await Clipboard.getData(Clipboard.kTextPlain);
+    if (data != null && data.text != null && _controller.text.isEmpty && !_hasError(data.text!)){
+      _controller.text = data.text!;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getFromClipboard();
   }
 
   @override
@@ -48,7 +62,7 @@ class _AddingTicketBottomSheetState extends State<AddingTicketBottomSheet> {
           ),
           Padding(
             padding: const EdgeInsets.all(25),
-            child: UrlInput(controller: _controller, hasError: _hasError,)
+            child: UrlInput(controller: _controller, hasError: !_isValidUrl,)
           ),
           ListView.builder(
             shrinkWrap: true,
@@ -87,9 +101,13 @@ class _AddingTicketBottomSheetState extends State<AddingTicketBottomSheet> {
               ),
               onPressed: (){
                 setState(() {
-                  validate(_controller.value.text);
+                  if (_hasError(_controller.value.text)){
+                    _isValidUrl = false;
+                  } else{
+                    _isValidUrl = true;
+                  }
                 });
-                if (!_hasError){
+                if (!_isValidUrl){
                   context.read<TicketStorageBloc>().add(
                       TicketStorageEvent.add(_controller.value.text, ticketType)
                   );
