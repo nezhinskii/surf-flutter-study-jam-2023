@@ -1,10 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:surf_flutter_study_jam_2023/features/ticket_storage/data/repositories/tickets_hive.dart';
 import 'package:surf_flutter_study_jam_2023/features/ticket_storage/ui/ticket_storage_bloc/ticket_storage_bloc.dart';
 import 'package:surf_flutter_study_jam_2023/features/ticket_storage/ui/widgets/floating_button.dart';
 import 'package:surf_flutter_study_jam_2023/features/ticket_storage/ui/widgets/bottom_sheet.dart';
 import 'package:surf_flutter_study_jam_2023/features/ticket_storage/ui/widgets/snack_bar.dart';
-import 'package:surf_flutter_study_jam_2023/features/ticket_storage/ui/widgets/ticket_tile.dart';
+import 'package:surf_flutter_study_jam_2023/features/ticket_storage/ui/widgets/ticket/ticket_downloading_cubit/ticket_downloading_cubit.dart';
+import 'package:surf_flutter_study_jam_2023/features/ticket_storage/ui/widgets/ticket/ticket_tile.dart';
 import 'package:surf_flutter_study_jam_2023/utils/app_colors.dart';
 import 'package:surf_flutter_study_jam_2023/utils/app_strings.dart';
 import 'package:surf_flutter_study_jam_2023/utils/app_text_styles.dart';
@@ -62,7 +65,15 @@ class TicketStoragePage extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                        child: TicketTile(ticket: tickets[index],),
+                        child: BlocProvider(
+                          create: (context) => TicketDownloadingCubit(
+                            context.read<TicketsHive>(),
+                            context.read<Dio>(),
+                            tickets[index],
+                            index
+                          ),
+                          child: const TicketTile(),
+                        ),
                       );
                     },
                     itemCount: tickets.length,

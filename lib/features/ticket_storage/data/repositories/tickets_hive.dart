@@ -18,4 +18,14 @@ class TicketsHive implements TicketsRepository{
     return _ticketBox.values.toList();
   }
 
+  @override
+  void update(int index, Ticket newValue) {
+    _ticketBox.putAt(index, newValue);
+  }
+
+  @override
+  Ticket? getAt(int index) {
+    return _ticketBox.getAt(index);
+  }
+
 }

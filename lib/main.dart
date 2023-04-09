@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -12,6 +13,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter<Ticket>(TicketAdapter());
   Hive.registerAdapter<TicketType>(TicketTypeAdapter());
+  Hive.registerAdapter<DownloadStatus>(DownloadStatusAdapter());
   await Hive.openBox<Ticket>(AppStrings.ticketsBox);
   runApp(const MyApp());
 }
@@ -21,8 +23,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (_) => TicketsHive(Hive.box<Ticket>(AppStrings.ticketsBox)),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<TicketsHive>(
+          create: (_) => TicketsHive(Hive.box<Ticket>(AppStrings.ticketsBox)),
+        ),
+        RepositoryProvider<Dio>(
+          create: (_) => Dio(),
+        ),
+      ],
       child: BlocProvider(
         create:  (context) =>
           TicketStorageBloc(context.read<TicketsHive>())..add(const TicketStorageEvent.fetch()),

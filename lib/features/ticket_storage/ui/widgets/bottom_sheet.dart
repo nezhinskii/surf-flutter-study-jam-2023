@@ -25,7 +25,7 @@ class _AddingTicketBottomSheetState extends State<AddingTicketBottomSheet> {
 
   bool _hasError(String str){
     if (!urlRegExp.hasMatch(str) || !str.endsWith('.pdf')){
-      return false;
+      return true;
     } else {
       return false;
     }
