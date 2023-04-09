@@ -20,6 +20,8 @@ class TicketsHive implements TicketsRepository{
 
   @override
   void update(int index, Ticket newValue) {
+    print('aaaaaaaaaaaaaaa');
+    print(newValue.downloadStatus);
     _ticketBox.putAt(index, newValue);
   }
 

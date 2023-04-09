@@ -48,21 +48,21 @@ mixin _$TicketDownloadingState {
   TResult map<TResult extends Object?>({
     required TResult Function(_NotStarted value) notStarted,
     required TResult Function(_InProgress value) inProgress,
-    required TResult Function(_Ended value) ended,
+    required TResult Function(Downloaded value) ended,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NotStarted value)? notStarted,
     TResult? Function(_InProgress value)? inProgress,
-    TResult? Function(_Ended value)? ended,
+    TResult? Function(Downloaded value)? ended,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NotStarted value)? notStarted,
     TResult Function(_InProgress value)? inProgress,
-    TResult Function(_Ended value)? ended,
+    TResult Function(Downloaded value)? ended,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -225,7 +225,7 @@ class _$_NotStarted implements _NotStarted {
   TResult map<TResult extends Object?>({
     required TResult Function(_NotStarted value) notStarted,
     required TResult Function(_InProgress value) inProgress,
-    required TResult Function(_Ended value) ended,
+    required TResult Function(Downloaded value) ended,
   }) {
     return notStarted(this);
   }
@@ -235,7 +235,7 @@ class _$_NotStarted implements _NotStarted {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NotStarted value)? notStarted,
     TResult? Function(_InProgress value)? inProgress,
-    TResult? Function(_Ended value)? ended,
+    TResult? Function(Downloaded value)? ended,
   }) {
     return notStarted?.call(this);
   }
@@ -245,7 +245,7 @@ class _$_NotStarted implements _NotStarted {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NotStarted value)? notStarted,
     TResult Function(_InProgress value)? inProgress,
-    TResult Function(_Ended value)? ended,
+    TResult Function(Downloaded value)? ended,
     required TResult orElse(),
   }) {
     if (notStarted != null) {
@@ -399,7 +399,7 @@ class _$_InProgress implements _InProgress {
   TResult map<TResult extends Object?>({
     required TResult Function(_NotStarted value) notStarted,
     required TResult Function(_InProgress value) inProgress,
-    required TResult Function(_Ended value) ended,
+    required TResult Function(Downloaded value) ended,
   }) {
     return inProgress(this);
   }
@@ -409,7 +409,7 @@ class _$_InProgress implements _InProgress {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NotStarted value)? notStarted,
     TResult? Function(_InProgress value)? inProgress,
-    TResult? Function(_Ended value)? ended,
+    TResult? Function(Downloaded value)? ended,
   }) {
     return inProgress?.call(this);
   }
@@ -419,7 +419,7 @@ class _$_InProgress implements _InProgress {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NotStarted value)? notStarted,
     TResult Function(_InProgress value)? inProgress,
-    TResult Function(_Ended value)? ended,
+    TResult Function(Downloaded value)? ended,
     required TResult orElse(),
   }) {
     if (inProgress != null) {
@@ -446,20 +446,22 @@ abstract class _InProgress implements TicketDownloadingState {
 }
 
 /// @nodoc
-abstract class _$$_EndedCopyWith<$Res>
+abstract class _$$DownloadedCopyWith<$Res>
     implements $TicketDownloadingStateCopyWith<$Res> {
-  factory _$$_EndedCopyWith(_$_Ended value, $Res Function(_$_Ended) then) =
-      __$$_EndedCopyWithImpl<$Res>;
+  factory _$$DownloadedCopyWith(
+          _$Downloaded value, $Res Function(_$Downloaded) then) =
+      __$$DownloadedCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Ticket ticket, int index});
 }
 
 /// @nodoc
-class __$$_EndedCopyWithImpl<$Res>
-    extends _$TicketDownloadingStateCopyWithImpl<$Res, _$_Ended>
-    implements _$$_EndedCopyWith<$Res> {
-  __$$_EndedCopyWithImpl(_$_Ended _value, $Res Function(_$_Ended) _then)
+class __$$DownloadedCopyWithImpl<$Res>
+    extends _$TicketDownloadingStateCopyWithImpl<$Res, _$Downloaded>
+    implements _$$DownloadedCopyWith<$Res> {
+  __$$DownloadedCopyWithImpl(
+      _$Downloaded _value, $Res Function(_$Downloaded) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -468,7 +470,7 @@ class __$$_EndedCopyWithImpl<$Res>
     Object? ticket = null,
     Object? index = null,
   }) {
-    return _then(_$_Ended(
+    return _then(_$Downloaded(
       null == ticket
           ? _value.ticket
           : ticket // ignore: cast_nullable_to_non_nullable
@@ -483,8 +485,8 @@ class __$$_EndedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Ended implements _Ended {
-  const _$_Ended(this.ticket, this.index);
+class _$Downloaded implements Downloaded {
+  const _$Downloaded(this.ticket, this.index);
 
   @override
   final Ticket ticket;
@@ -500,7 +502,7 @@ class _$_Ended implements _Ended {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Ended &&
+            other is _$Downloaded &&
             (identical(other.ticket, ticket) || other.ticket == ticket) &&
             (identical(other.index, index) || other.index == index));
   }
@@ -511,8 +513,8 @@ class _$_Ended implements _Ended {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_EndedCopyWith<_$_Ended> get copyWith =>
-      __$$_EndedCopyWithImpl<_$_Ended>(this, _$identity);
+  _$$DownloadedCopyWith<_$Downloaded> get copyWith =>
+      __$$DownloadedCopyWithImpl<_$Downloaded>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -557,7 +559,7 @@ class _$_Ended implements _Ended {
   TResult map<TResult extends Object?>({
     required TResult Function(_NotStarted value) notStarted,
     required TResult Function(_InProgress value) inProgress,
-    required TResult Function(_Ended value) ended,
+    required TResult Function(Downloaded value) ended,
   }) {
     return ended(this);
   }
@@ -567,7 +569,7 @@ class _$_Ended implements _Ended {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NotStarted value)? notStarted,
     TResult? Function(_InProgress value)? inProgress,
-    TResult? Function(_Ended value)? ended,
+    TResult? Function(Downloaded value)? ended,
   }) {
     return ended?.call(this);
   }
@@ -577,7 +579,7 @@ class _$_Ended implements _Ended {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NotStarted value)? notStarted,
     TResult Function(_InProgress value)? inProgress,
-    TResult Function(_Ended value)? ended,
+    TResult Function(Downloaded value)? ended,
     required TResult orElse(),
   }) {
     if (ended != null) {
@@ -587,8 +589,8 @@ class _$_Ended implements _Ended {
   }
 }
 
-abstract class _Ended implements TicketDownloadingState {
-  const factory _Ended(final Ticket ticket, final int index) = _$_Ended;
+abstract class Downloaded implements TicketDownloadingState {
+  const factory Downloaded(final Ticket ticket, final int index) = _$Downloaded;
 
   @override
   Ticket get ticket;
@@ -596,6 +598,6 @@ abstract class _Ended implements TicketDownloadingState {
   int get index;
   @override
   @JsonKey(ignore: true)
-  _$$_EndedCopyWith<_$_Ended> get copyWith =>
+  _$$DownloadedCopyWith<_$Downloaded> get copyWith =>
       throw _privateConstructorUsedError;
 }

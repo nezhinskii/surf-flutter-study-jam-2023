@@ -33,6 +33,7 @@ class TicketDownloadingCubit extends Cubit<TicketDownloadingState> {
         );
       },
     );
+    _ticketsRepository.update(state.index, _ticketsRepository.getAt(index)!.copyWith(DownloadStatus.ended));
     emit(TicketDownloadingState.ended(_ticketsRepository.getAt(index)!, index));
   }
 }
