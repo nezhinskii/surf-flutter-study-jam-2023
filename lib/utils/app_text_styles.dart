@@ -10,8 +10,8 @@ class AppTextStyles{
 
   static const strong = TextStyle(
       fontFamily: 'Roboto',
-      fontWeight: FontWeight.w800,
-      fontSize: 18,
+      fontWeight: FontWeight.w700,
+      fontSize: 16,
       color: Colors.black
   );
 

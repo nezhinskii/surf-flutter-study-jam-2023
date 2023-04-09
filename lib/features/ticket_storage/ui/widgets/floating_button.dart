@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:surf_flutter_study_jam_2023/utils/app_colors.dart';
 import 'package:surf_flutter_study_jam_2023/utils/app_text_styles.dart';
 
-class AppTextButton extends StatelessWidget {
-  const AppTextButton({
+class FloatingButton extends StatelessWidget {
+  const FloatingButton({
     Key? key,
     this.width,
     this.height,

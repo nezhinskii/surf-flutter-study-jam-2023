@@ -318,38 +318,39 @@ mixin _$TicketStorageState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Ticket> tickets) loaded,
+    required TResult Function(List<Ticket> tickets, String? errorMessage)
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Ticket> tickets)? loaded,
+    TResult? Function(List<Ticket> tickets, String? errorMessage)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Ticket> tickets)? loaded,
+    TResult Function(List<Ticket> tickets, String? errorMessage)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Loading value) loading,
-    required TResult Function(_ShowingList value) loaded,
+    required TResult Function(TicketStorageLoaded value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_ShowingList value)? loaded,
+    TResult? Function(TicketStorageLoaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Loading value)? loading,
-    TResult Function(_ShowingList value)? loaded,
+    TResult Function(TicketStorageLoaded value)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -411,7 +412,8 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Ticket> tickets) loaded,
+    required TResult Function(List<Ticket> tickets, String? errorMessage)
+        loaded,
   }) {
     return loading();
   }
@@ -420,7 +422,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Ticket> tickets)? loaded,
+    TResult? Function(List<Ticket> tickets, String? errorMessage)? loaded,
   }) {
     return loading?.call();
   }
@@ -429,7 +431,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Ticket> tickets)? loaded,
+    TResult Function(List<Ticket> tickets, String? errorMessage)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -442,7 +444,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Loading value) loading,
-    required TResult Function(_ShowingList value) loaded,
+    required TResult Function(TicketStorageLoaded value) loaded,
   }) {
     return loading(this);
   }
@@ -451,7 +453,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_ShowingList value)? loaded,
+    TResult? Function(TicketStorageLoaded value)? loaded,
   }) {
     return loading?.call(this);
   }
@@ -460,7 +462,7 @@ class _$_Loading implements _Loading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Loading value)? loading,
-    TResult Function(_ShowingList value)? loaded,
+    TResult Function(TicketStorageLoaded value)? loaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -475,40 +477,47 @@ abstract class _Loading implements TicketStorageState {
 }
 
 /// @nodoc
-abstract class _$$_ShowingListCopyWith<$Res> {
-  factory _$$_ShowingListCopyWith(
-          _$_ShowingList value, $Res Function(_$_ShowingList) then) =
-      __$$_ShowingListCopyWithImpl<$Res>;
+abstract class _$$TicketStorageLoadedCopyWith<$Res> {
+  factory _$$TicketStorageLoadedCopyWith(_$TicketStorageLoaded value,
+          $Res Function(_$TicketStorageLoaded) then) =
+      __$$TicketStorageLoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Ticket> tickets});
+  $Res call({List<Ticket> tickets, String? errorMessage});
 }
 
 /// @nodoc
-class __$$_ShowingListCopyWithImpl<$Res>
-    extends _$TicketStorageStateCopyWithImpl<$Res, _$_ShowingList>
-    implements _$$_ShowingListCopyWith<$Res> {
-  __$$_ShowingListCopyWithImpl(
-      _$_ShowingList _value, $Res Function(_$_ShowingList) _then)
+class __$$TicketStorageLoadedCopyWithImpl<$Res>
+    extends _$TicketStorageStateCopyWithImpl<$Res, _$TicketStorageLoaded>
+    implements _$$TicketStorageLoadedCopyWith<$Res> {
+  __$$TicketStorageLoadedCopyWithImpl(
+      _$TicketStorageLoaded _value, $Res Function(_$TicketStorageLoaded) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? tickets = null,
+    Object? errorMessage = freezed,
   }) {
-    return _then(_$_ShowingList(
-      null == tickets
+    return _then(_$TicketStorageLoaded(
+      tickets: null == tickets
           ? _value._tickets
           : tickets // ignore: cast_nullable_to_non_nullable
               as List<Ticket>,
+      errorMessage: freezed == errorMessage
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_ShowingList implements _ShowingList {
-  const _$_ShowingList(final List<Ticket> tickets) : _tickets = tickets;
+class _$TicketStorageLoaded implements TicketStorageLoaded {
+  const _$TicketStorageLoaded(
+      {required final List<Ticket> tickets, this.errorMessage})
+      : _tickets = tickets;
 
   final List<Ticket> _tickets;
   @override
@@ -519,55 +528,62 @@ class _$_ShowingList implements _ShowingList {
   }
 
   @override
+  final String? errorMessage;
+
+  @override
   String toString() {
-    return 'TicketStorageState.loaded(tickets: $tickets)';
+    return 'TicketStorageState.loaded(tickets: $tickets, errorMessage: $errorMessage)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ShowingList &&
-            const DeepCollectionEquality().equals(other._tickets, _tickets));
+            other is _$TicketStorageLoaded &&
+            const DeepCollectionEquality().equals(other._tickets, _tickets) &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_tickets));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_tickets), errorMessage);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ShowingListCopyWith<_$_ShowingList> get copyWith =>
-      __$$_ShowingListCopyWithImpl<_$_ShowingList>(this, _$identity);
+  _$$TicketStorageLoadedCopyWith<_$TicketStorageLoaded> get copyWith =>
+      __$$TicketStorageLoadedCopyWithImpl<_$TicketStorageLoaded>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
-    required TResult Function(List<Ticket> tickets) loaded,
+    required TResult Function(List<Ticket> tickets, String? errorMessage)
+        loaded,
   }) {
-    return loaded(tickets);
+    return loaded(tickets, errorMessage);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
-    TResult? Function(List<Ticket> tickets)? loaded,
+    TResult? Function(List<Ticket> tickets, String? errorMessage)? loaded,
   }) {
-    return loaded?.call(tickets);
+    return loaded?.call(tickets, errorMessage);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
-    TResult Function(List<Ticket> tickets)? loaded,
+    TResult Function(List<Ticket> tickets, String? errorMessage)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(tickets);
+      return loaded(tickets, errorMessage);
     }
     return orElse();
   }
@@ -576,7 +592,7 @@ class _$_ShowingList implements _ShowingList {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Loading value) loading,
-    required TResult Function(_ShowingList value) loaded,
+    required TResult Function(TicketStorageLoaded value) loaded,
   }) {
     return loaded(this);
   }
@@ -585,7 +601,7 @@ class _$_ShowingList implements _ShowingList {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Loading value)? loading,
-    TResult? Function(_ShowingList value)? loaded,
+    TResult? Function(TicketStorageLoaded value)? loaded,
   }) {
     return loaded?.call(this);
   }
@@ -594,7 +610,7 @@ class _$_ShowingList implements _ShowingList {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Loading value)? loading,
-    TResult Function(_ShowingList value)? loaded,
+    TResult Function(TicketStorageLoaded value)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -604,11 +620,14 @@ class _$_ShowingList implements _ShowingList {
   }
 }
 
-abstract class _ShowingList implements TicketStorageState {
-  const factory _ShowingList(final List<Ticket> tickets) = _$_ShowingList;
+abstract class TicketStorageLoaded implements TicketStorageState {
+  const factory TicketStorageLoaded(
+      {required final List<Ticket> tickets,
+      final String? errorMessage}) = _$TicketStorageLoaded;
 
   List<Ticket> get tickets;
+  String? get errorMessage;
   @JsonKey(ignore: true)
-  _$$_ShowingListCopyWith<_$_ShowingList> get copyWith =>
+  _$$TicketStorageLoadedCopyWith<_$TicketStorageLoaded> get copyWith =>
       throw _privateConstructorUsedError;
 }

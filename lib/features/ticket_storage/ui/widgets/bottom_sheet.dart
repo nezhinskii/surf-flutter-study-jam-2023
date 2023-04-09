@@ -93,6 +93,7 @@ class _AddingTicketBottomSheetState extends State<AddingTicketBottomSheet> {
                   context.read<TicketStorageBloc>().add(
                       TicketStorageEvent.add(_controller.value.text, ticketType)
                   );
+                  Navigator.of(context).pop();
                 }
               },
               child: const Text(AppStrings.add, style: AppTextStyles.white,)

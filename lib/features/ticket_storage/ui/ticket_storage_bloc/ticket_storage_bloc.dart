@@ -15,9 +15,8 @@ class TicketStorageBloc extends Bloc<TicketStorageEvent, TicketStorageState> {
   List<Ticket> tickets = [];
 
   void _onFetchEvent(_fetch event, Emitter<TicketStorageState> emit) async {
-    emit(const TicketStorageState.loading());
     await Future.delayed(const Duration(seconds: 1));
-    emit(TicketStorageState.loaded(tickets));
+    emit(TicketStorageState.loaded(tickets: tickets));
   }
 
   void _onAddEvent(_add event, Emitter<TicketStorageState> emit) {
@@ -26,11 +25,11 @@ class TicketStorageBloc extends Bloc<TicketStorageEvent, TicketStorageState> {
     final newTicket = Ticket(title: title, type: event.type, url: url);
     tickets.add(newTicket);
     late List<Ticket> old;
-    if (state is _ShowingList){
-      old = (state as _ShowingList).tickets;
+    if (state is TicketStorageLoaded){
+      old = (state as TicketStorageLoaded).tickets;
     } else{
       old = [];
     }
-    emit(TicketStorageState.loaded(old + [newTicket]));
+    emit(TicketStorageState.loaded(tickets: old + [newTicket]));
   }
 }

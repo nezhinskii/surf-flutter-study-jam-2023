@@ -6,6 +6,7 @@ abstract class AppStrings{
   static const enterUrl = "Введите Url";
   static const enterUrlError = "Введите корректный Url";
   static const noTickets = "Здесь пока ничего нет";
+  static const addingSuccess = "Билет успешно добавлен";
   static String ticketType(TicketType ticketType) {
     switch (ticketType) {
       case TicketType.train:

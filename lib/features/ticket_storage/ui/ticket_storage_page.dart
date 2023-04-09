@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:surf_flutter_study_jam_2023/common_widgets/app_text_button.dart';
 import 'package:surf_flutter_study_jam_2023/features/ticket_storage/ui/ticket_storage_bloc/ticket_storage_bloc.dart';
+import 'package:surf_flutter_study_jam_2023/features/ticket_storage/ui/widgets/floating_button.dart';
 import 'package:surf_flutter_study_jam_2023/features/ticket_storage/ui/widgets/bottom_sheet.dart';
+import 'package:surf_flutter_study_jam_2023/features/ticket_storage/ui/widgets/snack_bar.dart';
 import 'package:surf_flutter_study_jam_2023/utils/app_colors.dart';
 import 'package:surf_flutter_study_jam_2023/utils/app_strings.dart';
 import 'package:surf_flutter_study_jam_2023/utils/app_text_styles.dart';
@@ -26,10 +27,24 @@ class TicketStoragePage extends StatelessWidget {
         ),
         backgroundColor: AppColors.pageBackground,
         body: BlocConsumer<TicketStorageBloc, TicketStorageState>(
+          listenWhen: (previous, current) =>
+            previous is TicketStorageLoaded && current is TicketStorageLoaded,
           listener: (context, state) {
             state.whenOrNull(
-              loaded: (tickets) {
-
+              loaded: (tickets, errorMessage) {
+                if (errorMessage == null){
+                  showSnackBar(
+                    context: context,
+                    message: AppStrings.addingSuccess,
+                    color: AppColors.main
+                  );
+                } else{
+                  showSnackBar(
+                    context: context,
+                    message: errorMessage,
+                    color: Colors.red
+                  );
+                }
               },
             );
           },
@@ -38,7 +53,7 @@ class TicketStoragePage extends StatelessWidget {
                 loading: () => const Center(
                   child: CircularProgressIndicator(color: AppColors.main,),
                 ),
-                loaded: (tickets) {
+                loaded: (tickets, errorMessage) {
                   return tickets.isEmpty ?
                     const Center(
                         child: Text(AppStrings.noTickets, style: AppTextStyles.strong,)
@@ -52,7 +67,7 @@ class TicketStoragePage extends StatelessWidget {
             );
           },
         ),
-        floatingActionButton: AppTextButton(
+        floatingActionButton: FloatingButton(
           title: AppStrings.add,
           onPressed: () {
             showModalBottomSheet(
